@@ -1,0 +1,2 @@
+﻿<#LATEX>\\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_function_name</RSU_VAR_VAL>&<RSU_VAR_VAL>tex_function_description</RSU_VAR_VAL>&\\subsecref{<RSU_VAR_VAL>function_id</RSU_VAR_VAL>}\\\\</#LATEX>

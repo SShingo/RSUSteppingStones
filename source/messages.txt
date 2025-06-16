@@ -1,0 +1,106 @@
+key	en_US	ja_JP
+ALIAS_IS_USED	Alias "%#1s" is already used. Use different alias or Dispose existing one.	エイリアス "%#1s" は使用されています。違う名前を使うか、既存のものを削除してください。
+ASSERTION_VIOLATED	Assertion violated: %#1s (%#2s)	アサーション違反です: %#1s (%#2s)
+BYE	See you…	さようなら
+CLEAR_ALL_MACRO	Clearing all macros	マクロ全削除
+CONFIGURING_LOGGER	Configuring logger (Conf file: %#1s, Conf Key: %#2s)	ロガーを設定します（設定ファイル: %#1s, 設定キー: %#2s）
+CONV_ERR	Conversion error occured in %#1s record(s). Check dataset "%#2s"	%#1s 行のレコードで変換エラーが発生しました。データセット "%#2s" を確認してください。
+CONV_ERR_CHAR	Character variable is truncated. "%#1s" vs. "%#2s"	文字列型変数が切り捨てられました。"%#1s" vs. "%#2s"
+CONV_ERR_NUM	Number variable is not converted. Org: "%#1s"	数値型変数の変換に失敗しています。元データ: "%#1s"
+CONV_ERROR	Conversion error(s) occured. Check error table	データ変換エラーが発生しました。エラーテーブルを確認してください
+CRITICAL_ERROR	Critical Error !!!!	再起不能エラー!!!!
+DATASET_EMPTY	Dataset "%#1s" is empty.	データセット "%#1s" が空です。
+DATASET_NOT_FOUND	Dataset "%#1s" not found.	データセット "%#1s" が見つかりません。
+DAY_FRI_LONG	Friday	金曜日
+DAY_FRI_SHORT	Fri	金
+DAY_MON_LONG	Monday	月曜日
+DAY_MON_SHORT	Mon	月
+DAY_SAT_LONG	Saturday	土曜日
+DAY_SAT_SHORT	Sat	土
+DAY_SUN_LONG	Sunday	日曜日
+DAY_SUN_SHORT	Sun	日
+DAY_THU_LONG	Thursday	木曜日
+DAY_THU_SHORT	Thu	木
+DAY_TUE_LONG	Tuesday	火曜日
+DAY_TUE_SHORT	Tue	火
+DAY_WED_LONG	Wedesday	水曜日
+DAY_WED_SHORT	Wed	水
+DEFINE_GMV	%#1s global macro variable(s) defined by %#2s	%#1s 個のグローバルマクロ変数が %#2s から定義されました
+DEFINE_MSG_BY_TEXT	Defining Messages(prefix = "%#2s") by Text file "%#1s"	テキストファイル "%#1s" によってメッセージを定義します（Prefix = "%#2s"）
+DIR_ALREADY_EXISTS	Directory "%#1s" already exists	ディレクトリ "%#1s" は既に存在します
+DIR_CREATED	Directory "%#1s" created successfully	ディレクトリ "%#1s" の作成に成功しました
+DIR_NOT_FOUND	Directory "%#1s" not found.	ディレクトリ "%#1s" が見つかりません 
+DISPOSE_ALIAS	Disposing alias (type: %#1s name: %#2s suppl: %#3s)	エイリアス破棄 (type: %#1s name: %#2s suppl: %#3s)
+EMERGENCY_STOP	!!! Emergency stop !!! Emergency stop !!! Emergency stop !!!	!!! 緊急停止 !!! 緊急停止 !!! 緊急停止 !!!
+ERROR_OCCURED	Error(s) occured.	エラーが発生しました。
+EXCEL_SHEET_NOT_FOUND	Excel sheet "%#2s" not found in "%#1s"	エクセルシート "%#2s" が、ファイル "%#1s" に含まれていません
+EXEC_MODE_CHANGED	Execution mode changed into %#1s.	実行モードが %#1s に変更されました。
+FAIL_CREATE_DIR	Fail to create directory "%#1s"	ディレクトリ "%#1s" の作成に失敗しました
+FAIL_DELETE_DIR	Fail to delete directory "%#1s"	ディレクトリ "%#1s" の削除に失敗しました
+FAIL_GET_EXC_LOCK	Fail to get exclusive lock	排他ロックの取得に失敗しました
+FAIL_IMPORT_EXCEL	Fail to import excel file:"%#1s" sheet:"%#2s"	エクセルブック "%#1s" のワークシート "%#2s" のインポートに失敗しました
+FAIL_TO_CLOSE_DS	Fail to close dataset (dataset id = %#1s  return code = %#2s).	データセットのクローズに失敗しました（dataset id = %#1s  return code = %#2s）。
+FAIL_TO_CLOSE_FILE	Fail to close file: %#1s (File id: %#2s)	ファイル を閉じられませんでした：%#1s (File id: %#2s)
+FAIL_TO_FETCH_RECORD	Fail to fecth record (dataset id = %#1s  return code = %#2s).	レコードのフェッチに失敗しました（dataset id = %#1s  return code = %#2s）。
+FAIL_TO_FILE_OPE	File operation error: %#1s (File id: %#2s)	ファイル操作に失敗しました：%#1s (File id: %#2s)
+FAIL_TO_OPEN_DS	Fail to open dataset "%#1s" (sysmsg: %#2s).	データセット "%#1s" のオープンに失敗しました（システムメッセージ: %#2s）。
+FAIL_TO_OPEN_FILE	Fail to open file: %#1s (File id: %#2s)	ファイル を開けませんでした：%#1s (File id: %#2s)
+FAIL_TO_SAVE_DS	Fail to save dataset "%#1s"	データセット"%#1s" の保存に失敗しました 
+FILE_INCLUDING	sas file "%#1s" is including	sas ファイル "%#1s" をインクルードしています
+FILE_INCLUDED	sas file "%#1s" included	sas ファイル "%#1s" がインクルードされました
+FILE_NOT_FOUND	File "%#1s" not found.	ファイル "%#1s" が見つかりません。
+HEADER_DEBUG	+++++ DEBUG +++++	+++++ DEBUG +++++
+HEADER_DIAG	@@@@@ DIAG @@@@@	@@@@@ DIAG @@@@@
+HEADER_ERROR	>>>>> ERROR <<<<<	>>>>> エラー <<<<<
+HEADER_INFO	===== INFO =====	===== INFO =====
+HEADER_NOTE	***** NOTE *****	***** NOTE *****
+HEADER_PLANE		
+HEADER_WARNING	~~~~~ WARNING ~~~~~	~~~~~ 警告 ~~~~~
+INCLUDE_ALL	All sas files in directory "%#1s" are being included	ディレクトリ "%#1s" 内の すべてのsas ファイルがインクルードされます
+INCLUDE_ALL_R	All sas files in directory "%#1s" and its subdirecotries are being included	ディレクトリ "%#1s" とそのサブディレクトリ内の すべてのsas ファイルがインクルードされます
+INDEX_MUST_POSITIVE	Index(%#1s) must be positive value	インデックス（%#1s）は正の整数である必要があります
+INDEX_OUT_OF_RANGE	Index(%#1s) is out of range(<= %#2s)	インデックス（%#1s）が範囲外です（<= %#2s）
+INVALD_MACRO_VALUE	Macro variable "%#1s" has invalid value ("%#2s").	マクロ変数 "%#1s" の値が不正です（"%#2s"）。
+KEY_EXSITS	Key "%#1s" already exists	キー "%#1s" は既に存在しています
+KEY_NOT_FOUND	Key "%#1s" not found	キー "%#1s" が見つかりません 
+LIB_ASSIGNED	Library "%#1s" is assigned to "%#2s"	ライブラリ "%#1s" に "%#2s" が割り当てられました
+LIB_DEASSIGNED	Library "%#1s" is deassigned from "%#2s"	ライブラリ "%#1s" が "%#2s" から割り当て解除されました
+LIST_EMPTY	This list is empty	リストは空です
+LOG_LEVEL	Current log level =	ログレベル =
+LOGGER_CONFIG_DS	Confiugure Dataset: %#1s	ロガー設定データセット: %#1s
+LOGGER_CONFIG_KEY	Configuration Key: %#1s	ロガー設定キー: %#1s
+LOGGER_INVAID_CONF_KEY	Configuration Key "%#1s" is invalid	ロガー設定キー "%#1s" が不正です
+LOGGER_SETTING	Logger Setting:	ロガー設定：
+MACRO_ALREADY_USED	Macro variable "%#1s" is already used.	マクロ変数 "%#1s" はすでに使われています。
+MACRO_ARGS_OFF	Macro arguments is HIDDEN	マクロ引数は非表示です
+MACRO_ARGS_ON	Macro arguments is SHOWN	マクロ引数は表示されます
+MACRO_DEPTH_OFF	Macro depth is HIDDEN	マクロ深度は非表示です
+MACRO_DEPTH_ON	Macro depth is SHOWN	マクロ深度は表示されます
+MACRO_NAME_TOO_LONG	Cannot make accessor macro function for "%#1s" because length of variable is too long.	変数名が長すぎて変数 %#1s 用のアクセスマクロが作成できません
+MACRO_REMAINS	%#1s global marcro variable(s) generated by RSU Package remains wrongly… Deleting	%#1s 個のグローバルマクロ変数が不正に残存しています。削除します。
+MACRO_TRACE_OFF	Macro tracing is DISABLED	マクロ追跡は無効です
+MACRO_TRACE_ON	Macro tracing is ENABLED	マクロ追跡は有効です
+MACRO_VAR_BLANK	Macro variable "%#1s" is blank.	マクロ変数 "%#1s" が空です。
+NO_DATASET	No dataset found mached to reguler expression: %#1s	正規表現 %#1s にマッチするデータセットがありません
+NO_DEF_EXCEL	Excel worksheet of table defition for "%#1s" not found.	テーブル定義ワークシート "%#1s" が見つかりません
+NO_EXCEL_SHEET	Excel book "%#1s" does not have worksheet "%#2s".	エクセルブック "%#1s" にワークシート "%#2s" が見つかりません
+NO_KEY	Key "%#1s" not found	キー %#1s が見つかりません
+NO_OBSERVATION	No obserbation found in dataset	データセットにオブザベーションがありません
+NOT_EXCEL	File must be an Excel file(.xlsx file)	ファイルがエクセルファイルではありません（.xlsx ファイル）
+QUEUE_EMPTY	This queue is emoty	キューは空です
+SESSION_CLOSED	Session will be terminated	セッションは切断されます
+MSG_SET_CONSTANT	Constant global macro variable "%#1s" is set to "%#2s".	グローバル定数 "%#1s" の値を "%#2s" に設定しました
+SET_SYSTEM_OPTION	Setting system option: options %#1s	システムオプション設定：options  %#1s
+SHOW_RECORD	Only %#1s record(s) out of %#2s record(s) are shown.	全%#2s レコード中 %#1s レコードが表示されました
+STACK_EMPTY	This stack is empty	スタックは空です
+STRUCT_LOCKED	This Struct is locked	このStructはロックされています
+STRUCT_NAME_DEFINED	Struct name "%#1s" already defined.	Struct名称 "%#1s" は既に定義されています。
+STRUCT_NAME_NOT_FOUND	Struct name "%#1s" not found… Entry (%#1s, %#2s) added	Struct名称 "%#1s" は見つかりません。(%#1s, %#2s)が追加されます。
+SYS_ERROR	System function error occurred: %#1s. (Code: %#2s)  	システム関数呼び出し時にエラーが発生しました: %#1s （実行コード: %#2s）
+TEST	It's fine today	本日は晴天なり。
+TIMER_LAP_TIME	Lap#%#1s: %#2s	ラップ#%#1s: %#2s
+TIMER_NOTSTART	Timer not started	タイマーは作動していません
+TIMER_START	Timer start	タイマースタート
+TIMER_STOP	Timer stop	タイマーストップ
+TIMER_TOTAL_TIME	Total time: %#1s	総経過時間: %#1s
+MSG_CONV_ERR_CHAR	Conversion error %#1s vs. %#2s	変換エラー %#1s vs. %#2s

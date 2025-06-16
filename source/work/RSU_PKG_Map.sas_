@@ -1,0 +1,473 @@
+/***********************************************************************************/
+/* PROGRAM NAME : RSU_PKG_Map.sas
+/* PROGRAMMER : Shingo Suzuki (RSU SAS Institute Japan)
+/* DATE WRITTEN : 2021/4/17
+/*
+/* NOTE: key-value pairを以下のように保持
+/* NOTE: `#KEY:name``shingo``#KEY:age``49`
+************************************************************************************/
+/*<PackageID>RSUMap</PackageID>*/
+/*<CategoryID>Cate_MacroVariable</CategoryID>*/
+/*<PackagePurpose ja_jp>連想配列（Map）</PackagePurpose ja_jp>*/
+/*<PackageDesc ja_jp>連想配列（Map）機能を提供するパッケージ</PackageDesc ja_jp>*/
+/*<PackageDesc en_us>Collection of macro functions manipulating map</PackageDesc en_us>*/
+
+/*<ConstantDesc ja_jp>連想配列パッケージ Prefix</ConstantDesc ja_jp>*/
+%RSUSetConstant(RSUMap, RSUMap__)
+
+/*<FunctionDesc ja_jp>データセットから連想配列を生成します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>配列ID</FunctionReturn ja_jp>*/
+%macro RSUMap__CreateByDataset(
+/*<FunctionArgDesc ja_jp>配列の基になるデータセットクエリ</FunctionArgDesc ja_jp>*/
+										i_query
+/*<FunctionArgDesc ja_jp>キーを定義するデータセットの変数</FunctionArgDesc ja_jp>*/
+										, i_variable_key
+/*<FunctionArgDesc ja_jp>値を定義するデータセットの変数</FunctionArgDesc ja_jp>*/
+										, i_variable_value
+										);
+	%&RSUUtil.VerifyRequiredArgs(i_args = i_query i_variable_key i_variable_value)
+	%local /readonly _DS_MAP_CREATE = %&RSUDS.GetTempDSName(map_create);
+	data &_DS_MAP_CREATE.;
+		set &i_query.;
+		attrib
+			_map_item length = $10000.
+		;
+		_map_item = catx("|", cats('`', &i_variable_key., '`'), cats('`', &i_variable_value., '`'));
+	run;
+	quit;
+
+	%local /readonly __MAP_ID = %&RSUArrayEx.CreateByDataset(i_query = &_DS_MAP_CREATE.;
+																				, i_variable = _map_item);
+	&__MAP_ID.
+%mend RSUMap__CreateByDataset;
+
+/*<FunctionDesc ja_jp>連想配列を破棄します</FunctionDesc ja_jp>*/
+%macro RSUMap__Dispose(
+/*<FunctionArgDesc ja_jp>連想配列IDを保持する変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+								);
+	%&RSUArrayEx.Dispose(&ivar_map.)
+%mend RSUMap__Dispose;
+
+/*<FunctionDesc ja_jp>連想配列のサイズを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>連想配列のサイズ</FunctionReturn ja_jp>*/
+%macro RSUMap__Size(
+/*<FunctionArgDesc ja_jp>連想配列IDを保持する変数名</FunctionArgDesc ja_jp>*/
+							ivar_map
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local /readonly __MAP_ITEMS_ID_SIZE = &&&ivar_map.;
+	%&RSUArrayEx.Size(&&&__MAP_ITEMS_ID_SIZE.)
+%mend RSUMap__Size;
+
+/*<FunctionDesc ja_jp>連想配列が空か否かを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>0: 連想配列は空ではない、1: 連想配列が空</FunctionReturn ja_jp>*/
+%macro RSUMap__IsEmpty(
+/*<FunctionArgDesc ja_jp>連想配列IDを保持する変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+								);
+	%eval(%RSUArrayEx__Size(&ivar_map.) = 0)
+%mend RSUMap__IsEmpty;
+
+/*<FunctionDesc ja_jp>指定キーに対応する値を返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>指定キーに対応する値（見つからない場合はエラー）</FunctionReturn ja_jp>*/
+%macro RSUMap__Get(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+						, i_map_accessor
+						);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map_info)
+	%local __map_item_variable_name;
+	%Int_RSUMap_ItemParse(i_map_accessor = &i_map_accessor.
+								, ovar_map_item_variable_name = __map_item_variable_name)
+	%local /readonly __MAP_GET_ITEM = %&RSUDS.GetValue(SASHELP.vmacro(where = (name like upcase("&__map_item_variable_name"))), value);
+	%local /readonly __DELIM_POS = %sysfunc(find(&__MAP_GET_ITEM., `:));
+	%local /readonly __ITEM_LEN = %length(&__MAP_GET_ITEM.);
+
+	%local _value;
+	%if (&__DELIM_POS. + 1 < &__ITEM_LEN.) %then %do;
+		%let _value = %substr(&__MAP_GET_ITEM., &__DELIM_POS. + 2, &__ITEM_LEN. - &__DELIM_POS. - 1);
+	%end;
+	&_value.
+%mend RSUMap__Get;
+
+/*<FunctionDesc ja_jp>連想配列の内容を詳細表示します</FunctionDesc ja_jp>*/
+%macro RSUMap__Show(
+/*<FunctionArgDesc ja_jp>連想配列IDを保持する変数名</FunctionArgDesc ja_jp>*/
+						ivar_map
+/*<FunctionArgDesc ja_jp>タイトル</FunctionArgDesc ja_jp>*/
+						, i_title =
+						);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ja_jp )
+	%local _items_info;
+	%local __map_item;
+	%local __map_key;
+	%local __map_val;
+	%local _index;
+	%let _index = 1;
+	%local /readonly __MAP_ID_SHOW = &&&ivar_map.;
+	%let &__MAP_ID_SHOW._index = 0;
+	%do %while(%RSUArrayEx__ForEach(&ivar_map._MPK, __map_key));
+		%let __map_val = &&&ivar_map._MPV_&__map_key.;
+		%let __map_item = [&__map_key]:&__map_val.;
+		%&RSUText.Append(iovar_base = _items_info
+							, i_append_text = &__map_item.
+							, i_delimiter = &RSUComma.)
+		%let _index = %eval(&_index. + 1);
+	%end;
+	%let &__MAP_ID_SHOW._index = 0;
+	%if (not %&RSUMacroVariable.IsBlank(i_title)) %then %do;
+		%let _items_info = &i_title.,&_items_info.;
+	%end;
+	%&RSULogger.PutBlock(&_items_info.)
+%mend RSUMap__Show;
+
+
+
+/*<FunctionDesc ja_jp>連想配列が空か否かを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>0: 要素あり\quad 1: 空</FunctionReturn ja_jp>*/
+%macro RSUMap__IsEmpty(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+								);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%RSUArray__GetIsEmpty(ivar_array = &ivar_map.)
+%mend RSUMap__IsEmpty;
+
+
+/*<FunctionDesc ja_jp>指定キーが存在するか否かを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>0:指定キーが存在しない\quad 0以外: 指定キーの要素番号</FunctionReturn ja_jp>*/
+%macro RSUMap__FindKey(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+							ivar_map
+/*<FunctionArgDesc ja_jp>検索キー</FunctionArgDesc ja_jp>*/
+							, i_key
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map_info)
+	%local /readonly __MAP_GET_KEY_ID = &&&ivar_map.;
+	%local __map_get_key;
+	%local /readonly __FIND_KEY = %&RSUDS.IsDSEmpty(SASHELP.vmacro(where = (name like upcase("&__MAP_GET_KEY_ID._ARI_%") and prxmatch("^`&__map_get_key.`:", value))), name);
+	%eval(not &__FIND_KEY.)
+%mend RSUMap__FindKey;
+
+/*<FunctionDesc ja_jp>連想配列の内容をログに出力します</FunctionDesc ja_jp>*/
+%macro RSUMap__Print(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+							ivar_map
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local _rsu_map_print_key_iter;
+	%let _rsu_map_print_key_iter = %RSUMap__GetKeyIterator(ivar_map = &ivar_map.);
+	%local _rsu_map_print_key;
+	%do %while(%&_rsu_map_print_key_iter.Next);
+		%let _rsu_map_print_key = %&_rsu_map_print_key_iter.Current;
+		%put &ivar_map.[&_rsu_map_print_key.] = %RSUMap__Get(ivar_map = &ivar_map., i_key = %&_rsu_map_print_key_iter.Current);
+	%end;
+	%&RSUClass.Dispose(_rsu_map_print_key_iter)
+%mend RSUMap__Print;
+
+/*<FunctionDesc ja_jp>検索キーの配列を返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>検索キーの配列</FunctionReturn ja_jp>*/
+%macro RSUMap__GetKeys(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+								);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	/* !ここにIteratorを使うと、戻り値ありのマクロ内で使えない */
+	%local _rsu_map_keys_array;
+
+	%local _rsu_map_getkeys_size;
+	%let _rsu_map_getkeys_size = %RSUArray__GetSize(ivar_array = &ivar_map.);
+	%local _rsu_map_getkeys_index;
+	%let _rsu_map_getkeys_index =1;
+	%local _rsu_map_getkeys_dummy;
+	%local _rsu_map_getkeys_key;
+	%do %while(&_rsu_map_getkeys_index. <= &_rsu_map_getkeys_size.);
+		%let _rsu_map_getkeys_key = %RSUArray__Get(&ivar_map., i_index = &_rsu_map_getkeys_index.);
+		%let _rsu_map_getkeys_key = %substr(&_rsu_map_getkeys_key., %length(&RSU_G_KEY_PREFIX.) + 1, %length(&_rsu_map_getkeys_key.) - %length(&RSU_G_KEY_PREFIX.));
+		%let _rsu_map_getkeys_dummy = %RSUList__Add(iovar_list = _rsu_map_keys_array
+																, i_item = &_rsu_map_getkeys_key.);
+		%let _rsu_map_getkeys_index = %eval(&_rsu_map_getkeys_index. + 2);
+	%end;
+
+	&_rsu_map_keys_array.
+%mend RSUMap__GetKeys;
+
+/*<FunctionDesc ja_jp>値の配列を返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>値の配列</FunctionReturn ja_jp>*/
+%macro RSUMap__GetValues(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+								);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local /readonly _TMP_ITERATOR = %RSUArray__GetIterator(ivar_array = ivar_map);
+	%local _values_array;
+	%if (%&_TMP_ITERATOR.Next) %then %do;
+		%do %while(%&_TMP_ITERATOR.Next);
+			%RSUList__Add(iovar_list = _values_array
+							, i_item = %&_TMP_ITERATOR.Current)
+			%&_TMP_ITERATOR.Next;
+		%end;
+	%end;
+	%&RSUClass.Dispose(_TMP_ITERATOR)
+
+	&_keys_array.
+%mend RSUMap__GetValues;
+
+/*<FunctionDesc ja_jp>Key-Value pairイテレータを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>Key-Value pairイテレータ</FunctionReturn ja_jp>*/
+%macro RSUMap__GetIterator(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+									ivar_map
+/*<FunctionArgDesc ja_jp>イテレータの向き（1: Forward、-1: Backward）</FunctionArgDesc ja_jp>*/
+									, i_direction = 1
+									);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local /readonly _KVPS_ARRAY = %RSUMap__GetKVPs(ivar_map = &ivar_map.);
+	%RSUArray__GetIterator(ivar_array = _kvps_array
+								, i_direction = &i_direction.)
+%mend RSUMap__GetIterator;
+
+/*<FunctionDesc ja_jp>検索キーのイテレータを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>検索キーのイテレータ</FunctionReturn ja_jp>*/
+%macro RSUMap__GetKeyIterator(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+										ivar_map
+/*<FunctionArgDesc ja_jp>イテレータの向き（1: Forward、-1: Backward）</FunctionArgDesc ja_jp>*/
+										, i_direction = 1
+										);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local /readonly _KEYS_ARRAY = %RSUMap__GetKeys(ivar_map = &ivar_map.);
+	%RSUArray__GetIterator(ivar_array = _KEYS_ARRAY
+								, i_direction = &i_direction.)
+%mend RSUMap__GetKeyIterator;
+
+/*<FunctionDesc ja_jp>検索キーのイテレータを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>検索キーのイテレータ</FunctionReturn ja_jp>*/
+%macro RSUMap__GetValueIterator(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+										ivar_map
+/*<FunctionArgDesc ja_jp>イテレータの向き（1: Forward、-1: Backward）</FunctionArgDesc ja_jp>*/
+										, i_direction = 1
+										);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local /readonly _VALUES_ARRAY = %RSUMap__GetValues(ivar_array = &iviva_mapar_array.);
+	%RSUArray__GetIterator(ivar_array = _values_array
+								, i_direction = &i_direction.)
+%mend RSUMap__GetValueIterator;
+
+/*<FunctionDesc ja_jp>連想配列をデータセットにエクスポートします</FunctionDesc ja_jp>*/
+%macro RSUMap__ExportToDS(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+								ivar_map
+/*<FunctionArgDesc ja_jp>エクスポート先のデータセット</FunctionArgDesc ja_jp>*/
+								, ods_output_ds
+/*<FunctionArgDesc ja_jp>行番号を含めるか否か</FunctionArgDesc ja_jp>*/
+								, i_contain_index = %&RSUBool.False
+/*<FunctionArgDesc ja_jp>変数サイズ</FunctionArgDesc ja_jp>*/
+								, i_var_length = 500
+								);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	data &ods_output_ds.;
+		attrib
+			index length = 8.
+			key length = $&i_var_length.
+			value length = $&i_var_length.
+		;
+		stop;
+	run;
+	quit;
+
+	%local /readonly _TMP_KVP_ITERATOR = %RSUMap__GetIterator(&ivar_map.);
+	%local _key;
+	%local _value;
+	%local _index;
+	%do %while(%&_TMP_KVP_ITERATOR.Next);
+		%let _key = %RSUMap__GetKey(%&_TMP_KVP_ITERATOR.Current);
+		%let _value = %RSUMap__GetValue(%&_TMP_KVP_ITERATOR.Current);
+		%let _index = %&_TMP_KVP_ITERATOR.CurrentIndex;
+		proc sql noprint;
+			insert into
+				&ods_output_ds.(index, key, value)
+			values(&_index., "&_key.", "&_value.")
+			;
+		quit;
+	%end;
+	%&RSUClass.Dispose(_TMP_KVP_ITERATOR)
+	%if (&i_contain_index. ne 1) %then %do;
+		data &ods_output_ds.;
+			set &ods_output_ds.;
+			drop
+				index
+			;
+		run;
+		quit;
+	%end;
+%mend RSUMap__ExportToDS;
+
+/*<FunctionDesc ja_jp>指定キーに対応する値を更新します（キーが存在しない場合は追加）</FunctionDesc ja_jp>*/
+%macro RSUMap__Set(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+						iovar_map
+/*<FunctionArgDesc ja_jp>検索キー</FunctionArgDesc ja_jp>*/
+						, i_key =
+/*<FunctionArgDesc ja_jp>設定値</FunctionArgDesc ja_jp>*/
+						, i_value =
+						);
+	%&RSUUtil.VerifyRequiredArgs(i_args = iovar_map)
+	%local _rsu_map_index;
+	%let _rsu_map_index = %RSUArray__Find(ivar_array = &iovar_map.
+																, i_item = &RSU_G_KEY_PREFIX.&i_key.);
+	%if (0 < &_rsu_map_index.) %then %do;
+		%let _rsu_map_index = %eval(&_rsu_map_index. + 1);
+		%RSUArray__Set(iovar_array = &iovar_map.
+							, i_index = &_rsu_map_index.
+							, i_value = &i_value.)
+	%end;
+	%else %do;
+		/* 新規追加 */
+		%RSUMap__Add(iovar_map = &iovar_map.
+						, i_key = &i_key.
+						, i_value = &i_value.)
+	%end;
+%mend RSUMap__Set;
+
+/*<FunctionDesc ja_jp>新規 Key-Value pairを追加します（キーが既存の場合はエラー）</FunctionDesc ja_jp>*/
+%macro RSUMap__Add(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+						iovar_map
+/*<FunctionArgDesc ja_jp>追加キー</FunctionArgDesc ja_jp>*/
+						, i_key =
+/*<FunctionArgDesc ja_jp>追加値</FunctionArgDesc ja_jp>*/
+						, i_value =);
+	%&RSUUtil.VerifyRequiredArgs(i_args = iovar_map)
+	%local _index;
+	%let _index = %RSUArray__Find(ivar_array = &iovar_map.
+											, i_item = &RSU_G_KEY_PREFIX.&i_key.);
+	%if (0 < &_index.) %then %do;
+		%&RSULogger.PutError(Key Already Exists)
+	%end;
+	%else %do;
+		/* 新規追加 */
+		%let &iovar_map. = &&&iovar_map.&RSU_G_ARRAY_DELIMITER.&RSU_G_KEY_PREFIX.&i_key.&RSU_G_ARRAY_DELIMITER.&RSU_G_ARRAY_DELIMITER.&i_value.&RSU_G_ARRAY_DELIMITER.;
+	%end;
+%mend RSUMap__Add;
+
+/*<FunctionDesc ja_jp>指定キーの要素を削除します（キーが存在しない場合はエラー）</FunctionDesc ja_jp>*/
+%macro RSUMap__Delete(
+/*<FunctionArgDesc ja_jp>Key-Value Pair配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+							iovar_map
+/*<FunctionArgDesc ja_jp>検索キー</FunctionArgDesc ja_jp>*/
+							, i_key =
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = iovar_map)
+	%local _index;
+	%let _index = %RSUArray__Find(ivar_array = &iovar_map.
+											, i_item = &RSU_G_KEY_PREFIX.&i_key.);
+	%if (&_index. = 0) %then %do;
+		%&RSULogger.PutError(Key Not Found)
+	%end;
+	%else %do;
+		%local /readonly _DELETED_KEY = %RSUList__RemoveItemAt(iovar_list = &iovar_map
+																				, i_index = &_index.);
+		%local /readonly _DELETED_ITEM = %RSUList__RemoveItemAt(iovar_list = &iovar_map
+																				, i_index = &_index.);
+	%end;
+%mend RSUMap__Delete;
+
+/*<FunctionDesc ja_jp>連想配列をクリアします</FunctionDesc ja_jp>*/
+%macro RSUMap__Clear(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+							iovar_map
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = iovar_map)
+	%RSUArray__Clear(iovar_array = &iovar_map.)
+%mend RSUMap__Clear;
+
+/*<MacroDesc jp_jp>Key-Value pairのKeyを返します<MacroDesc jp_jp> */
+/*<FunctionReturn ja_jp>Key</FunctionReturn ja_jp>*/
+%macro RSUMap__GetKey(
+/*<FunctionArgDesc ja_jp>Key-Value pair</FunctionArgDesc ja_jp>*/
+							i_kvp
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = i_kvp)
+	%local _key;
+	%let _key = %scan(&i_kvp., 1, :);
+	&_key.
+%mend RSUMap__GetKey;
+
+/*<MacroDesc jp_jp>Key-Value pairのValueを返します<MacroDesc jp_jp> */
+/*<FunctionReturn ja_jp>Value</FunctionReturn ja_jp>*/
+%macro RSUMap__GetValue(
+/*<FunctionArgDesc ja_jp>Key-Value pair</FunctionArgDesc ja_jp>*/
+								i_kvp
+								);
+	%&RSUUtil.VerifyRequiredArgs(i_args = i_kvp)
+	%local _value;
+	%let _value = %scan(&i_kvp., 2, :);
+	&_value.
+%mend RSUMap__GetValue;
+
+/*<FunctionDesc ja_jp>連想配列内のKey-Value pairを連結したテキストを返します</FunctionDesc ja_jp>*/
+/*<FunctionReturn ja_jp>全Key-Value pairを連結した文字列</FunctionReturn ja_jp>*/
+%macro RSUMap__GetText(
+/*<FunctionArgDesc ja_jp>連想配列を保持しているマクロ変数名</FunctionArgDesc ja_jp>*/
+							ivar_map
+/*<FunctionArgDesc ja_jp>要素間の区切り文字</FunctionArgDesc ja_jp>*/
+							, i_delimiter = %str( )
+/*<FunctionArgDesc ja_jp>要素をダブルクォーテーションで囲むか否か </FunctionArgDesc ja_jp>*/
+							, i_is_quoted = %&RSUBool.False
+							);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ivar_map)
+	%local _string;
+	%if (0 < %RSUArray__GetSize(ivar_array = &ivar_map.)) %then %do;
+		%let _tmp_kvps = %RSUMap__GetKVPs(&ivar_map.);
+		%let _string = %nrbquote(%sysfunc(RSU_fcmp_get_array_text(&_tmp_kvps., &i_delimiter., &i_is_quoted.)));
+	%end;
+	&_string.
+%mend RSUMap__GetText;
+
+/*<FunctionDesc ja_jp>データセットをインポートして連想配列を作成します</FunctionDesc ja_jp>*/
+%macro RSUMap__ImportFromDS(
+/*<FunctionArgDesc ja_jp>インポート元データセット</FunctionArgDesc ja_jp>*/
+									ids_input_ds =
+/*<FunctionArgDesc ja_jp>検索キーの変数名</FunctionArgDesc ja_jp>*/
+									, i_key_varname =		
+/*<FunctionArgDesc ja_jp>値の変数名</FunctionArgDesc ja_jp>*/
+									, i_value_varname =
+/*<FunctionArgDesc ja_jp>配列を保持するマクロ変数</FunctionArgDesc ja_jp>*/
+									, ovar_map =
+									);
+	%&RSUUtil.VerifyRequiredArgs(i_args = ids_input_ds i_key_varname i_value_varname ovar_map)
+	/* ! KEYの一意性の確認 */
+	%local _no_of_key;
+	proc sql noprint;
+		select
+			max(key_count) into :_no_of_key
+		from
+			(select
+				count(&i_key_varname.) as key_count
+			from
+				&ids_input_ds.
+			group by
+				&i_key_varname.
+			)
+		;
+	quit;
+
+	%let &ovar_map. =;
+	%if (1 < &_no_of_key.) %then %do;
+		%RUSLogger.Error(Key is not unique.)
+	%end;
+	%else %do;
+		%local _kvp_items;
+		proc sql noprint;
+			select
+				cats("&RSU_G_ARRAY_DELIMITER.&RSU_G_KEY_PREFIX.", &i_key_varname., "&RSU_G_ARRAY_DELIMITER.&RSU_G_ARRAY_DELIMITER.", &i_value_varname., "&RSU_G_ARRAY_DELIMITER.") into :_kvp_items separated by ''
+			from
+				&ids_input_ds.
+			;
+		quit;
+
+		%let &ovar_map. = &_kvp_items.;
+	%end;
+%mend RSUMap__ImportFromDS;

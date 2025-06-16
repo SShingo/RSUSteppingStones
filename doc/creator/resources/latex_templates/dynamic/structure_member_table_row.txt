@@ -1,0 +1,2 @@
+﻿<#LATEX>\\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_structure_mem_id</RSU_VAR_VAL>&<RSU_VAR_VAL>tex_structure_mem_value</RSU_VAR_VAL>&<RSU_VAR_VAL>structure_mem_description</RSU_VAR_VAL>\\\\</#LATEX>

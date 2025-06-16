@@ -1,0 +1,12 @@
+﻿<#LATEX>\\section{<RSU_VAR_VAL>tex_format_name</RSU_VAR_VAL>}</#LATEX>
+<#LATEX>\\paragraph{\\DocStrTitleRDMPredefinedFormatConversion}<RSU_VAR_VAL>format_description</RSU_VAR_VAL></#LATEX>
+<#LATEX>%%%%% Table of format components %%%%%</#LATEX>
+<#LATEX>\\begin{center}</#LATEX>
+<#LATEX>\\begin{xltabular}{\\textwidth}{|p{7truecm}|X|}</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\thead{\\DocStrHeaderFormatInput}&\\thead{\\DocStrHeaderFormatOutput}\\\\</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX><#INPUT>format_component_table_rows_in_<RSU_VAR_VAL>format_id</RSU_VAR_VAL></#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\end{xltabular}</#LATEX>
+<#LATEX>\\end{center}</#LATEX>

@@ -1,0 +1,37 @@
+\section{グローバル定数}
+以下の変数はモジュール内で使用される読み取り専用グローバル変数です。
+\begin{marker}
+プログラム内で同名のグローバル変数を宣言したり、当該変数を書き換えようとするとエラーが発生し、処理が中断します。
+\end{marker}
+
+%%%%%% Table of global constants %%%%%
+\begin{center}
+{\footnotesize
+\begin{xltabular}{\textwidth}{|p{5truecm}|X|p{5truecm}|}
+\hline
+\thead{\DocStrHeaderGlobalConstantName}&\thead{\DocStrDescription}&\thead{\DocStrHeaderGlobalConstantValue}\\
+\hline
+<#INPUT>global_constant_table_rows
+\hline
+\end{xltabular}
+}
+\end{center}
+
+\section{グローバルマクロ変数}
+以下の変数はモジュール内で使用されるグローバル変数です。
+\begin{marker}
+これらグローバル変数の値は書き換え可能ですが（モジュール側で書き換え制限を課せられないため）、絶対にプログラム中に削除したり、書き換えたりしないでください。予測不能な結果をもたらす可能性があります。
+\end{marker}
+
+%%%%% Table of global variables %%%%%
+\begin{center}
+{\footnotesize
+\begin{xltabular}{\textwidth}{|p{5truecm}|X|}
+\hline
+\thead{\DocStrHeaderGlobalVariableName}&\thead{\DocStrDescription}\\
+\hline
+<#INPUT>global_variable_table_rows
+\hline
+\end{xltabular}
+}
+\end{center}

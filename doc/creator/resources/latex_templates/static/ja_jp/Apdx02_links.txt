@@ -1,0 +1,12 @@
+RDM を作成するにあたり参考にした書籍、サイトなど
+\paragraph{書籍}
+\begin{itemize}
+	\item ``Carpenter's Complete Guide to the SAS Macro Language, Third Edition 3rd Edition''(ISBN-10: 1629592684), Art Carpenter, SAS Institute; 3rd edition (August 25, 2016)
+	\item ``Carpenter's Guide to Innovative SAS Techniques''(ISBN-10: 1607649918), Art Carpenter, SAS Institute (February 27, 2012)
+\end{itemize}
+
+\paragraph{サイト}
+\begin{itemize}
+	\item SAS忘備録: \texttt{https://sas-boubi.blogspot.com/}
+	\item データステップ100万回 SAS新手一生: \texttt{https://http://sas-tumesas.blogspot.com/}
+\end{itemize}

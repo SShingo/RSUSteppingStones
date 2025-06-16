@@ -1,0 +1,4 @@
+﻿config_id	log_level	show_arguments	option_notes	option_source	option_source2	option_mprint	option_mlogic
+DEEP	3	1	0	0	0	0	0
+MID	2	0	0	0	0	0	0
+LIGHT	1	0	0	0	0	0	0

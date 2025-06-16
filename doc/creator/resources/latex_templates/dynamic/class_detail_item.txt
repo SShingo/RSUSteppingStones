@@ -1,0 +1,1 @@
+﻿<#LATEX><RSU_VAR_VAL>tex_package_detail</RSU_VAR_VAL></#LATEX>

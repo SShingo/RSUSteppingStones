@@ -1,0 +1,19 @@
+﻿\begin{itemize}
+\item 本文書、および\RDM の著作権は鈴木慎吾に属します。
+\item \RDM の仕様、および本文書の内容は将来予告なしに変更することがあります。
+\item 本文書で使用されている製品名、社名などは、一般にその所有者の商標または登録商法です。
+\item 著者は本文書、および\RDM の完全性・正確性を保障致しません。いかなる場合においても、著者は本文書、および\RDM に関連して生じた通常の直接的、間接的、必然的、偶発的、特別な、あるいは懲罰的賠償について、たとえ著者がそのような賠償が発生する可能性があることを通告されたとしても、何ら責任を負いません。
+\end{itemize}
+\vskip\baselineskip
+\noindent【著作者】\par
+\noindent 鈴木慎吾\par
+\noindent SAS Institute Japan株式会社\par
+\noindent Risk Solution Unit\par
+\noindent\texttt{shingo.suzuki@sas.com}
+\vskip2\baselineskip
+\begin{center}
+\doublebox{%
+\begin{minipage}{12truecm}
+本書の内容の全部または一部を無断で複写，複製，転記載および磁気または光記録媒体等への入力を行うことは，法律で定められた場合を除き，著作権の侵害となりますので，その場合はあらかじめ小社あて許諾を求めて下さい．
+\end{minipage}}
+\end{center}

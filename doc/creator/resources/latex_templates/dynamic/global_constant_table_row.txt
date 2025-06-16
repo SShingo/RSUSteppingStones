@@ -1,0 +1,2 @@
+﻿<#LATEX>\\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_constant_id</RSU_VAR_VAL>&<RSU_VAR_VAL>constant_description</RSU_VAR_VAL>&<RSU_VAR_VAL>tex_constant_value</RSU_VAR_VAL>\\\\</#LATEX>

@@ -1,0 +1,7 @@
+﻿option batch abort
+option confirm off
+open sftp://azureuser@tcfdtest.internal.cloudapp.net -privatekey="C:\Users\jpnssu\Downloads\RiskTeam_Common_Key.ppk"
+option include "*.sas; *.txt; |doc/latex/figs/; .git/; doc/latex/sources/test/*.tex; doc/latex/sources/ja_jp/*; doc/latex/sources/en_us/* doc/latex; winscp_sync*; readme.txt"
+synchronize remote "C:\Users\jpnssu\SAS\MY SAS WORK - RSU_Dev_Module_Git" /sas/RSU/RSU_DevModule
+keepuptodate -delete "C:\Users\jpnssu\SAS\MY SAS WORK - RSU_Dev_Module_Git" /sas/RSU/RSU_DevModule
+exit

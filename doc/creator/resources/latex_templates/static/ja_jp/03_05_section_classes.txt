@@ -1,0 +1,18 @@
+\RDM は（疑似）クラス（Quasi Class）をサポートしており、インスタンスを作成し、インスタンスが提供するクラス関数を利用することが可能です。
+\section{\DocStrTitleRDMClassList}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Class List
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+{\footnotesize
+\begin{xltabular}{\textwidth}{|p{5truecm}|X|p{2.5truecm}|}
+\hline
+\thead{\DocStrHeaderClassName}&\thead{\DocStrHeaderClassPurpose}&\thead{\DocStrRefto}\\
+\hline
+<#INPUT>class_table_rows
+\hline
+\end{xltabular}
+}
+\end{center}
+
+<#INPUT>class_sections

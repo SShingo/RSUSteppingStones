@@ -1,0 +1,14 @@
+﻿<#LATEX>\\section{<RSU_VAR_VAL>tex_structure_id</RSU_VAR_VAL>}</#LATEX>
+<#LATEX>\\paragraph{\\DocStrDescription}<RSU_VAR_VAL>structure_description</RSU_VAR_VAL></#LATEX>
+<#LATEX>%%%%% Table of structure members %%%%%</#LATEX>
+<#LATEX>\\begin{center}</#LATEX>
+<#LATEX>{\\footnotesize</#LATEX>
+<#LATEX>\\begin{xltabular}{\\textwidth}{|p{5truecm}|p{2truecm}|X|}</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\thead{\\DocStrHeaderStructMemberName}&\\thead{\\DocStrHeaderStructMemberValue}&\\thead{\\DocStrDescription}\\\\</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX><#INPUT>structure_member_table_rows_in_<RSU_VAR_VAL>structure_id</RSU_VAR_VAL></#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\end{xltabular}</#LATEX>
+<#LATEX>}</#LATEX>
+<#LATEX>\\end{center}</#LATEX>

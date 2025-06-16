@@ -1,0 +1,2 @@
+﻿<#LATEX>\\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_class_id</RSU_VAR_VAL>&<RSU_VAR_VAL>class_purpose</RSU_VAR_VAL>&\\secref{<RSU_VAR_VAL>class_id</RSU_VAR_VAL>}\\\\</#LATEX>

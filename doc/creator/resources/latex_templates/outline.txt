@@ -1,0 +1,111 @@
+﻿\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Disclaimer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{\DocStrTitleDisclaimer}
+<#INPUT>disclaimer
+
+% Table of Contents
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Part.1: ユーザーズガイド
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{\DocStrTitlePartUsersManual}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.1: RSU Development Module とは
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleWhatIsRDM}
+
+%%%% Sec.1-1: RSU Development Module 開発背景 %%%%
+\section{\DocStrTitleRDMBackground}
+<#INPUT>01_01_section_background
+
+%%%% Sec.1-2: RSU Development Moduleの存在意義 %%%%
+\section{\DocStrTitleRDMRaisonDetre}
+<#INPUT>01_02_section_raison_detre
+
+%%%% Sec.1-3: RSU Development Moduleの特徴 %%%%
+\section{\DocStrTitleRDMFeatures}
+<#INPUT>01_03_section_features
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.2: RSU Development Module 使用法
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMUsage}\label{chap:RDM_USAGE}
+
+%%%% Sec.2-1: RSU Development Module ファイル配置 %%%%
+\section{\DocStrTitleRDMDeployment}
+<#INPUT>02_01_section_deployment
+
+%%%% Sec.2-2: RSU Development Module 使い方 %%%%
+\section{\DocStrTitleRDMHowToUse}
+<#INPUT>02_02_section_activation
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Part.2: リファレンスガイド
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{\DocStrTitleReferenceManual}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.3: 予約済みマクロ変数
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMReservedMacVars}
+<#INPUT>03_01_section_reserved_macro_vars
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.4: 事前定義フォーマット
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMPredefinedFormat}
+<#INPUT>03_02_section_predefined_format
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.5: 事前定義構造体
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMPredefStructure}
+<#INPUT>03_03_section_predefined_structure
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.6+: パッケージ（カテゴリー別に表示）
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<#INPUT>03_04_section_package_each_category
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chp.+7: （疑似）クラス
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMQuasiClassDetails}
+<#INPUT>03_05_section_classes
+
+% 付録
+\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appdx.A:（疑似）オブジェクト指向プログラム
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleRDMQuasiOOP}
+
+%%%% A1-1: （疑似）オブジェクト指向プログラムとは %%%%
+\section{\DocStrTitleRDMWhatIsQuasiOOP}
+<#INPUT>Apdx01_01_section_what_is_QOOP
+
+%%%% A1-2: 種明かし %%%%
+\section{\DocStrTitleRDMTrickOfQOOP}
+<#INPUT>Apdx01_02_section_tricks_of_QOOP
+
+%%%% A1-3: 使い方 %%%%
+\section{\DocStrTitleRDMUsageOfQOOP}
+<#INPUT>Apdx01_03_section_usage_of_QOOP
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appdx.B:リンク
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\DocStrTitleLinks}
+<#INPUT>Apdx02_links

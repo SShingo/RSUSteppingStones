@@ -1,0 +1,102 @@
+\subsection{これまでのBase SASプログラミング}
+プログラム作成していると、基本的な処理を何度も何度も記述することがあります。
+\paragraph{頻出定形処理の例}
+\begin{itemize}
+\item マクロ変数が空か否かの判定
+\item データセットのオブザベーション数取得
+\item データセットの変数一覧をスペース区切りで連結
+\item 2つのデータセットのInner Join
+\item ディレクトリ作成
+\item ディレクトリ内のファイル一覧取得
+\item 複数の.sas ファイルのインクルード
+\end{itemize}
+
+こうした頻出の基本処理でも、Base SAS言語ではかなりのコーディング--しかも、他の言語と比較してかなり個性的なコーディング--を要求されます。
+
+\paragraph{例1: マクロ変数が空か否かの判定}
+この目的を達成するための手法はそれこそ山のようにあり、十人十色のコードが生み出されています\footnote{参考になるドキュメント：\texttt{https://support.sas.com/resources/papers/proceedings09/022-2009.pdf}}。
+\begin{lstlisting}[language=SAS, caption={マクロ変数が空か否かのチェック}, label={code:is_macro_blank}, breaklines = true]
+/* 方法1 */
+%if (&_my_macro. =) %then %do;
+   ...
+%end;
+
+/* 方法2 */
+%if ("&_my_macro." = "") %then %do;
+   ...
+%end;
+
+/* 方法3 */
+%if (%length(&_my_macro.) = 0) %then %do;
+   ...
+%end;
+
+/* 方法4 */
+%if (&_my_macro. = %str()) %then %do;
+   ...
+%end;
+
+/* etc. etc... */
+\end{lstlisting}
+
+\paragraph{例2: データセットのオブザベーション数取得}
+いくつかの方法が存在しますが、最も基本的な方法はSQLを使った方法ではないでしょうか（\coderef{get_count}）。
+\begin{lstlisting}[language=SAS, caption={データセットのオブザベーション数取得}, label={code:get_count}, breaklines = true]
+proc sql noprint;
+	select
+		count(*) into: _no_of_obs trimmed
+	from
+		WORK.dsA
+	;
+quit;
+%put &=_no_of_obs;
+\end{lstlisting}
+
+\paragraph{例3: Inner Join}
+データセット\texttt{WORK.dsA}にデータセット\texttt{WORK.dsB}の情報を結合する場合を考えます。
+結合のキーはデータセットAのカラムaとデータセットBのカラムbとします（両データセットに同名の変数はないものとします）。
+
+\begin{enumerate}
+\item 両データセットで結合キーとなるカラムを同じ名前にする
+\item 両データセットを結合キーでソートする
+\item 両データセットをmerges する。その際 ``in''オプションを使う
+\item 両データセットにオブザベーションが存在するか否かを判定して output する
+\end{enumerate}
+このように煩雑な処理が必要です。
+
+こうしたSAS言語特有の作法・記述法が思い出せないために、データセットに対する基本的なオペレーションにおいてですら、いざコーディングする際には毎回インターネットを検索、マニュアル（ヘルプ）を調査、過去コードからコピペすることが常態化しています。
+結果として、以下ような問題が発生します。
+\begin{itemize}
+\item 調査による開発効率の低下
+\item 参考コードの違いによるスタイルの違い（参考サイトからコードをコピペした場合に顕著）
+\item コピペミスによるバグの誘発
+\item 人により（場合によっては同一人物であっても）同一処理であっても処理方法が異なる
+\item 類似コードが多数量産されることによるメンテナンス性の低下
+\end{itemize}
+
+こうした問題を解決すべく開発されたのが``{\bfseries \RDM}''です。
+
+\subsection{これからのBase SASプログラミング}
+\RDM を用いると、先のサンプルコードは以下のように記述されます。
+\paragraph{例1（\RDM 使用版）: マクロ変数が空か否かの判定}\mbox{}\\
+\begin{lstlisting}[language=SAS, caption={マクロ変数が空か否かの判定}, label={code:is_macro_blank_new}, breaklines = true]
+%if (%&RSUUtil.IsMacroBlank(_my_macro)) %then %do;
+	%put マクロ変数は空です; 
+%end;
+\end{lstlisting}
+``\texttt{IsMacroBlank}''という、一見しただけで処理の内容が読み取れる関数を用いています。
+
+\paragraph{例2（\RDM 使用版）: データセットのオブザベーション数取得}\mbox{}\\
+\begin{lstlisting}[language=SAS, caption={データセットのオブザベーション数取得}, label={code:get_count_new}, breaklines = true]
+%put %&RSUDS.GetCount(WORK.dsA);
+\end{lstlisting}
+この例も同様に``\texttt{GetCount}''という、一見しただけで処理の内容が読み取れる関数を用いています。
+
+\paragraph{例3（\RDM 使用版）: Inner Join}\mbox{}\\
+\begin{lstlisting}[language=SAS, caption={データセットのInner Join}, label={code:inner_join_new}, breaklines = true]
+%&RSUDS.InnerJoin(ids_lhs_ds = WORK.dsA
+						, ids_rhs_ds = WORK.dsB
+						, i_condition = a:b)
+\end{lstlisting}
+``\texttt{InnerJoin}''という、一見しただけで処理の内容が読み取れる関数を用いており、関数に渡す引数については特に事前処理も必要ありません。
+

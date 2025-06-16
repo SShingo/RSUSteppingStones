@@ -1,0 +1,2 @@
+﻿<#LATEX>\\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_function_arg_var</RSU_VAR_VAL>&<RSU_VAR_VAL>tex_function_arg_description</RSU_VAR_VAL>&<RSU_VAR_VAL>tex_is_required</RSU_VAR_VAL>\\\\</#LATEX>

@@ -1,0 +1,42 @@
+﻿<#LATEX>\\subsection{<RSU_VAR_VAL>tex_function_name_short</RSU_VAR_VAL>}\\label{subsec:<RSU_VAR_VAL>function_id</RSU_VAR_VAL>}</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_function_description</RSU_VAR_VAL></#LATEX>
+if (has_detail = 1) then do;<#LATEX>%%%%% Function Detail %%%%%</#LATEX>end;
+if (has_detail = 1) then do;<#LATEX>\\paragraph{\\DocStrDetails}</#LATEX>end;
+if (has_detail = 1) then do;<#LATEX><#INPUT>function_detail_items_of_<RSU_VAR_VAL>function_id</RSU_VAR_VAL></#LATEX>end;
+<#LATEX>{\\small</#LATEX>
+<#LATEX>\\begin{DefFunc}{<RSU_VAR_VAL>tex_function_name</RSU_VAR_VAL>}</#LATEX>
+<#LATEX>\\begin{tabular}{rl}</#LATEX>
+<#LATEX>\\makecell[r]{\\bfseries \\DocStrTitleFunctionDefinition :}&\\begin{minipage}[t]{\\RSUFuncArgWidth}</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>%  Definition</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>\begin{verbatim}</#LATEX>
+<#LATEX><#INPUT>function_definition_of_<RSU_VAR_VAL>function_id</RSU_VAR_VAL></#LATEX>
+<#LATEX>\end{verbatim}</#LATEX>
+<#LATEX>\\end{minipage}\\\\\\\\</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>%  Return value</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+if (has_return = 1) then do;<#LATEX>\\makecell[r]{\\bfseries \\DocStrTitleFunctionReturn :}&<RSU_VAR_VAL>tex_function_return</RSU_VAR_VAL>\\\\\\\\</#LATEX>end;
+if (has_return = 0) then do;<#LATEX>\\makecell[r]{\\bfseries \\DocStrTitleFunctionReturn :}&\\DocStrFunctionNoReturn\\\\\\\\</#LATEX>end;
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>%  Argument table</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+if (has_argument = 1) then do;<#LATEX>\\makecell[r]{\\bfseries \\DocStrTitleFunctionArgument :}&\\begin{minipage}[t]{\\RSUFuncArgWidth}\\vspace*{-7pt}</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\begin{tabularx}{\\RSUFuncArgWidth}{|l|X|c|}</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\hline</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\thead{\\DocStrHeaderFunctionArgumentVariable}&\\thead{\\DocStrDescription}&\\thead{\\DocStrHeaderFunctionArgumentRequired}\\\\</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\hline</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX><#INPUT>function_argument_table_rows_of_<RSU_VAR_VAL>function_id</RSU_VAR_VAL></#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\hline</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\end{tabularx}</#LATEX>end;
+if (has_argument = 1) then do;<#LATEX>\\end{minipage}\\\\\\\\</#LATEX>end;
+if (has_argument = 0) then do;<#LATEX>\\makecell[r]{\\bfseries \\DocStrTitleFunctionArgument :}&\\DocStrFunctionNoArguments\\\\</#LATEX>end;
+<#LATEX>\\end{tabular}</#LATEX>
+if (has_note = 1) then do;<#LATEX>%%%%% Funcion Note %%%%%</#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\vskip\\baselineskip</#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\begin{marker}</#LATEX>end;
+if (has_note = 1) then do;<#LATEX><#INPUT>function_note_items_of_<RSU_VAR_VAL>function_id</RSU_VAR_VAL></#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\end{marker}</#LATEX>end;
+<#LATEX>\\end{DefFunc}</#LATEX>
+<#LATEX>}</#LATEX>

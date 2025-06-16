@@ -1,0 +1,70 @@
+﻿\documentclass[a4, 10pt]{ltjsbook}
+\def\RSULocale{en_us}
+%上下幅設定
+\setlength{\textheight}{\paperheight}   % 本文領域を一旦紙面の高さにする
+\setlength{\topmargin}{13.6truemm}      % 上の余白を39mm（=1inch+13.6mm）に
+\addtolength{\topmargin}{-\headheight}  % 
+\addtolength{\topmargin}{-\headsep}     % ヘッダの分だけ上の余白を小さくする
+\addtolength{\textheight}{-74truemm}    % 下の余白35mmと合わせて、上下余白分だけ本文領域の高さを小さくする。
+
+%左右幅設定
+\setlength{\fullwidth}{\paperwidth}     % 全体の幅（テキスト領域の幅ではない）を一旦紙面幅にする
+\setlength{\evensidemargin}{-0.4truemm} % 左の余白を25mm(=1inch-0.4mm)に
+\setlength{\oddsidemargin}{-0.4truemm}  % 上に同じ
+\addtolength{\fullwidth}{-50truemm}     % 左右余白分だけ本文領域の幅を小さくする。
+\setlength{\textwidth}{\fullwidth}      % テキスト幅を全体の幅に一致させる
+\setlength{\tabcolsep}{6pt} 
+\setcounter{tocdepth}{2}
+\usepackage{amsmath, amsfonts, amssymb, bm}
+\usepackage{framed}
+\usepackage{ntheorem}
+\usepackage{graphicx, color}
+\usepackage{tcolorbox}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{listings,jvlisting}
+\usepackage[Bjornstrup]{fncychap}
+\usepackage{makecell}
+\usepackage{xltabular}
+\usepackage{pifont}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeorange}{rgb}{1,0.49,0}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.95}
+\definecolor{white}{rgb}{1,1,1}
+\lstset{
+	backgroundcolor=\color{backcolor},
+	basicstyle={\ttfamily\footnotesize},
+	commentstyle=\color{codegreen},
+	breaklines=true,
+	columns=[l]{fullflexible},
+	numbers=left,
+	numbersep=5pt
+	xleftmargin=10pt,
+	numberstyle={\scriptsize},
+	stepnumber=1,
+	numbersep=1\zw,
+	tabsize = 2,
+	keepspaces=true,
+	framextopmargin=2pt,
+	framexleftmargin=2pt,
+	framerule=0pt,
+	frame={tbrl},
+	rulecolor=\color{white},
+	lineskip=1pt,
+	lineskip=-0.5ex
+}
+\newcommand{\coderef}[1]{Source Code\ref{code:#1}}
+\renewcommand\lstlistingname{Source Code}
+\renewcommand\lstlistlistingname{Source Code}
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[2pt]}
+\renewcommand\cellgape{\Gape[2pt]}
+\input{src/\RSULocale/dynamic/title.tex}
+\author{SAS Institute Japan RSU}
+\begin{document}
+\maketitle
+\tableofcontents
+\input{src/\RSULocale/outline.tex}
+\end{document}

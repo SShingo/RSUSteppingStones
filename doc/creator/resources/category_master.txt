@@ -1,0 +1,7 @@
+package_category	package_category_description_ja_jp	package_category_description_en_us
+Cate_DataHandling	データセットの取り扱いに役立つパッケージ	Data Handling
+Cate_MacroVariable	マクロ変数の取り扱いに役立つパッケージ	Macro Variables
+Cate_ExternalFile	外部ファイルシステムの扱いに役立つパッケージ	External Files
+Cate_DebuggingAndLogging	デバッグ、ログ出力に役立つパッケージ	Debugging and Logging
+Cate_ProgramDesign	プログラムの設計開発に役立つパッケージ	Designing Programs
+Cate_Misc	その他の便利機能を実現するパッケージ	Other Miscellaneous Functions

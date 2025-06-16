@@ -1,0 +1,32 @@
+RSU Develoment Moduleの機能を使用するには、{\bfseries セッションごと}にモジュールを起動する必要があります。以下に起動手順を示します。
+\begin{enumerate}
+    \item グローバルマクロ変数 ``\texttt{G\_SAS\_RSU\_DEV\_MODULE\_ROOT\_DIR}''に起動プログラム``\texttt{rsu\_steppingstones\_activate}''を配置したディレクトリの絶対パスを設定します。
+    \item マクロ``\texttt{rsu\_steppingstones\_activate}''を実行します\footnote{このマクロは\texttt{rsu\_steppingstones\_activate.sas}ファイルに定義されています。}。
+\end{enumerate}
+\begin{lstlisting}[language=SAS, caption={RSU Stepping Stones 使用例}, label={code:activation}, breaklines = true]
+%global G_SAS_RSU_DEV_MODULE_ROOT_DIR;
+%let G_SAS_RSU_DEV_MODULE_ROOT_DIR = /sas/RSU/RSU_DevModule;					/* モジュールのパス設定 */
+
+%include "&G_SAS_RSU_DEV_MODULE_ROOT_DIR./rsu_dev_module_activate.sas";
+%rsu_dev_module_activate(i_dir = /sas/RSU/RSU_DevModule)							/* モジュール起動（モジュール本体を配置したディレクトリを指定） */
+
+%&RSUSys.ShowModuleInfo																		/* モジュールの機能実行例 */
+\end{lstlisting}
+
+前節で示した推奨設定を行ってある場合、自身のプログラムの先頭に\texttt{\%rsu\_steppingstones\_activate}と記述するだけでモジュールの起動が完了します（\coderef{activation_revised}）。
+\begin{lstlisting}[language=SAS, caption={RSU Steppting Stones起動例}, label={code:activation_revised}, breaklines = true]
+%rsu_steppginstones_activate													/* モジュール起動（パスの指定不要） */
+
+%&RSUSys.ShowModuleInfo															/* モジュールの機能実行例 */
+\end{lstlisting}
+\begin{marker}
+モジュール配置ディレクトリに複数のバージョンのモジュールが配置してある場合、上記コードによって最新バージョンのものが選択・起動されます。
+\end{marker}
+
+\paragraph{起動マクロ詳細}
+モジュール配置ディレクトリに複数のバージョンのモジュールが配置してある場合、下記コードによって使用バージョンを指定できます。
+\begin{lstlisting}[language=SAS, caption={RSU Stepping Stones 起動例（バージョン指定）}, label={code:activation_revised_versioned}, breaklines = true]
+%rsu_steppginstones_activate(i_version = 180)							/* モジュール起動（バージョン 1.8.0） */
+
+%&RSUSys.ShowModuleInfo															/* モジュールの機能実行例 */
+\end{lstlisting}

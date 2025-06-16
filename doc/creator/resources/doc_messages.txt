@@ -1,0 +1,53 @@
+﻿command	ja_jp	en_us
+RDM	RSU Stepping Stones	RSU Stepping Stones
+Author	SAS Institute Japan RSU	SAS Institute Japan RSU
+DocStrTitleDisclaimer	お断り	Disclaimer
+DocStrTitlePartUsersManual	ユーザーズガイド	User's Guide
+DocStrTitleWhatIsRDM	\RDM とは?	What is ``\RDM''?
+DocStrTitleRDMBackground	\RDM 開発背景	\RDM background
+DocStrTitleRDMRaisonDetre	\RDM の存在意義	Why Is \RDM Needed?
+DocStrTitleRDMFeatures	\RDM 特徴	Features of \RDM
+DocStrTitleRDMPackages	\RDM パッケージ一覧	Packages in \RDM
+DocStrTitleRDMUsage	\RDM 使用法	Usage of \RDM
+DocStrTitleRDMDeployment	ファイル配置	Deployment
+DocStrTitleRDMActivation	起動	Activation
+DocStrTitleRDMHowToUse	使い方	How to Use
+DocStrTitleRDMReservedMacVars	予約済みマクロ変数	Reserved Macro Variables
+DocStrTitleRDMPredefinedFormat	事前定義フォーマット	Pre-defined Format
+DocStrTitleRDMPredefStructure	事前定義構造体	Pre-defined Structure Type
+DocStrTitleReferenceManual	リファレンスガイド	Reference Guide
+DocStrTitleRDMQuasiClassDetails	（疑似）クラス詳細	Quasi Class Details
+DocStrTitleRDMQuasiOOP	（疑似）オブジェクト指向プログラム	Quasi Object Oriented Programing (QOOP)
+DocStrTitleRDMWhatIsQuasiOOP	（疑似）オブジェクト指向プログラムとは	What Is QOOP?
+DocStrTitleRDMTrickOfQOOP	種明かし	Tricks of QOOP
+DocStrTitleRDMUsageOfQOOP	使い方	Usage of QOOP
+DocStrTitleLinks	リンク	Links
+DocStrTitlePackageListInCategory	カテゴリー内パッケージ一覧	Package list in the category
+DocStrTitleClassCreationFunction	生成関数	Creator function
+DocStrTitleClassFunctionList	クラス関数一覧	Classes
+DocStrTitleRDMPredefinedFormatConversion	変換	Formatting
+DocStrTitleFunctionDefinition	定義	Definition
+DocStrTitleFunctionReturn	戻り値	Return Value
+DocStrTitleFunctionArgument	引数	Arguments
+DocStrTitleRDMPackageFunctionList	関数一覧	Function List
+DocStrTitleRDMCategoryList	カテゴリー一覧	Categories
+DocStrTitleRDMClassList	クラス一覧	Classes
+DocStrHeaderPackageName	パッケージ名	Package Name
+DocStrHeaderPackagePurpose	パッケージ用途	Package purpose
+DocStrHeaderFunctionName	関数名	Function Name
+DocStrHeaderFormatInput	フォーマット入力	Format Input
+DocStrHeaderFormatOutput	フォーマット出力	Format Output
+DocStrHeaderFunctionArgumentVariable	引数	Argument
+DocStrHeaderFunctionArgumentRequired	必須	Req.
+DocStrHeaderStructMemberName	メンバー名	Member Name
+DocStrHeaderStructMemberValue	メンバー値	Member Value
+DocStrHeaderGlobalConstantName	定数名	Constant Name
+DocStrHeaderGlobalConstantValue	定数値	Constant Value
+DocStrHeaderGlobalVariableName	グローバル変数名	Global Variable Name
+DocStrHeaderClassName	クラス名	Class Name
+DocStrHeaderClassPurpose	クラス目的	Purpose
+DocStrFunctionNoReturn	戻り値なし	No return value
+DocStrFunctionNoArguments	引数なし	No arguments
+DocStrRefto	参照先	Refer to
+DocStrDescription	説明	Description
+DocStrDetails	詳細

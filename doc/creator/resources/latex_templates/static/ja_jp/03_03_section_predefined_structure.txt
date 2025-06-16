@@ -1,0 +1,17 @@
+\RDM は``構造体''のごとき機能を提供します。
+構造体のメンバーへのアクセスは、``\texttt{\%\&}<構造体名>\texttt{.}<メンバー名>''とします。
+
+例えば、構造体``\texttt{RSUBool}''は``\texttt{True}''と``\texttt{False}''の2つのメンバーを持ち、\coderef{structure_example}のような記法でメンバー値を取得出来ます。
+\begin{lstlisting}[language=SAS, caption={構造体の使用例}, label={code:structure_example}, breaklines = true]
+%macro Structure_Sample(i_boolean =);
+	%if (&i_boolean.) %then %do;
+		%put 真;
+	%end;
+	%else %do;
+		%put 偽;
+	%end;
+%mend Structure_Sample;
+
+%Structure_Sample(i_boolean = %&RSUBool.True)		/* 構造体 RSUBool のメンバーへのアクセス */
+\end{lstlisting}
+<#INPUT>structure_sections

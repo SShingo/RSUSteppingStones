@@ -1,0 +1,23 @@
+﻿<#LATEX>\\section{<RSU_VAR_VAL>tex_package_id</RSU_VAR_VAL>\\;---\\;<RSU_VAR_VAL>tex_package_purpose</RSU_VAR_VAL>\\;---}\\label{sec:<RSU_VAR_VAL>package_id</RSU_VAR_VAL>}</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_package_description</RSU_VAR_VAL></#LATEX>
+<#LATEX>%%%%%% Function list %%%%%</#LATEX>
+<#LATEX>\\paragraph{\\DocStrTitleRDMPackageFunctionList}</#LATEX>
+<#LATEX>\\begin{center}</#LATEX>
+<#LATEX>{\\footnotesize</#LATEX>
+<#LATEX>\\begin{xltabular}{\\textwidth}{|p{4truecm}|X|p{1.2truecm}|}</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\thead{\\DocStrHeaderFunctionName}&\\thead{\\DocStrDescription}&\\thead{\\DocStrRefto}\\\\</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX><#INPUT>package_function_table_rows_in_<RSU_VAR_VAL>package_id</RSU_VAR_VAL></#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\end{xltabular}</#LATEX>
+<#LATEX>}</#LATEX>
+<#LATEX>\\end{center}</#LATEX>
+if (has_detail = 1) then do;<#LATEX>\\vskip\\baselineskip</#LATEX>end;
+if (has_detail = 1) then do;<#LATEX>\\paragraph{\\DocStrDetails}</#LATEX>end;
+if (has_detail = 1) then do;<#LATEX><#INPUT>package_detail_items_of_<RSU_VAR_VAL>package_id</RSU_VAR_VAL></#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\vskip\\baselineskip</#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\begin{marker}</#LATEX>end;
+if (has_note = 1) then do;<#LATEX><#INPUT>package_note_items_of_<RSU_VAR_VAL>package_id</RSU_VAR_VAL></#LATEX>end;
+if (has_note = 1) then do;<#LATEX>\\end{marker}</#LATEX>end;
+<#LATEX><#INPUT>function_sections_in_<RSU_VAR_VAL>package_id</RSU_VAR_VAL></#LATEX>

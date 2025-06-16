@@ -1,0 +1,30 @@
+\RDM は複数の{\bfseries パッケージ}と呼ばれる単位で構成されています。
+パッケージは用途別に定義されており、各パッケージはそれぞれの用途に係る機能を実現する関数が定義されています。
+
+\paragraph{関数呼び出し}
+パッケージ内の関数の呼び出しには特定の記法に従う必要があります。
+一般にパッケージ\texttt{RSU**}に定義された関数\texttt{FuncA}を呼び出すには、
+\begin{center}
+\texttt{\%\&RSU**.FuncA}
+\end{center}
+と記述します
+コード\coderef{call_function}に一例を示します。
+\begin{lstlisting}[language=SAS, caption={パッケージ内の関数の呼び出し例}, label={code:call_function}, breaklines = true]
+%rsu_steppingstones_acrivate
+
+%&RSULogger.PutNote(これはRSULoggerパッケージの呼び出し例です)
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of all categories
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\DocStrTitleRDMCategoryList}
+\begin{center}
+\begin{xltabular}{\textwidth}{|X|p{2truecm}|}
+\hline
+\thead{\DocStrDescription}&\thead{\DocStrRefto}\\
+\hline
+<#INPUT>category_table_rows
+\hline
+\end{xltabular}
+\end{center}

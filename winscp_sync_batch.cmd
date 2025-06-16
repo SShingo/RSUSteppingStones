@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\WinSCP\winscp.com" /script="C:\Users\jpnssu\SAS\MY SAS WORK - RSU_Dev_Module_Git\winscp_sync_script_jpnvm2011175.txt"

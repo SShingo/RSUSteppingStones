@@ -1,0 +1,37 @@
+\subsection{配布ファイル}
+\RDM のファイルは以下の2ファイルです。
+\begin{itemize}
+	\item sasデータセット``\texttt{rsu\_stepping\_stones\_v***.sas7bdat}''（モジュール本体）\footnote{データセット名の末尾の3桁の数字はバージョンを表しています。}
+	\item sasプログラムファイル``\texttt{rsu\_steppingstones\_activate.sas}''（モジュール起動プログラム）
+\end{itemize}
+
+\subsection{ファイル配置}
+\begin{itemize}
+	\item sasデータセット``\texttt{rsu\_stepping\_stones\_v***.sas7bdat}''をプログラムから参照できるディレクトリに配置します\footnote{異なるバージョンのモジュールを並列に配置しておくことも可能です。}。
+	\item sasプログラム``\texttt{rsu\_steppingstones\_activate.sas}''をプログラムから参照できるディレクトリに配置します。
+	\item ``\texttt{rsu\_stepping\_stones\_v***.sas7bdat}''を配置したディレクトリ下に``\texttt{work}''という名前のディレクトリを作成します。
+\end{itemize}
+図\ref{fig:DEPLOYMENT}に配置の例を示します（モジュールバージョン 2.00 配置例）。
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=10truecm]{figs/fig_deployment.eps}
+\end{center}
+\caption{パッケージの配置例}\label{fig:DEPLOYMENT}
+\end{figure}
+\begin{marker}
+モジュール本体を配置するディレクトリ（およびその配下の\texttt{work}ディレクトリ）にはユーザーによる{\bfseries 書き込み権限}が与えられている必要があります。
+\end{marker}
+\paragraph{推奨設定}
+\begin{itemize}
+	\item 起動プログラム```\texttt{rsu\_steppingstones\_activate.sas}''配置ディレクトリに``\texttt{bin}''ディレクトリを作成し、そこにモジュール本体を配置します。
+	\item SAS起動時実行プログラム``\texttt{appserver\_autoexec\_usermods.sas}''にグローバルマクロ変数 ``\texttt{G\_SAS\_RSU\_DEV\_MODULE\_ROOT\_DIR}''の設定とsasautosオプションの設定をしておきます（\coderef{sasautos}）。
+\end{itemize}
+
+\begin{lstlisting}[language=SAS, caption={\texttt{appserver\_autoexec\_usermods.sas}における設定内容例}, label={code:sasautos}, breaklines = true]
+...
+%global /readonly G_SAS_RSU_DEV_MODULE_ROOT_DIR = /sas/RSU/RSU_DevModule;
+options insert = (sasautos = ("&G_SAS_RSU_DEV_MODULE_ROOT_DIR."));
+...
+\end{lstlisting}
+
+こうすることで、\RDM の起動が容易になります（次節参照）。

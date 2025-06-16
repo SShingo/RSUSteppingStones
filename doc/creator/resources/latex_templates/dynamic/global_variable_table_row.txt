@@ -1,0 +1,2 @@
+﻿<#LATEX>\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>tex_global_variable_id</RSU_VAR_VAL>&<RSU_VAR_VAL>global_variable_description</RSU_VAR_VAL>\\\\</#LATEX>

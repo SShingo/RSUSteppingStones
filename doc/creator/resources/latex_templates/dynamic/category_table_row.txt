@@ -1,0 +1,2 @@
+﻿<#LATEX>\hline</#LATEX>
+<#LATEX><RSU_VAR_VAL>category_description</RSU_VAR_VAL>&\\secref{<RSU_VAR_VAL>category_id</RSU_VAR_VAL>}\\\\</#LATEX>

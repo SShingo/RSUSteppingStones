@@ -1,0 +1,15 @@
+﻿<#LATEX>\\chapter{<RSU_VAR_VAL>category_description</RSU_VAR_VAL>}\\label{sec:<RSU_VAR_VAL>category_id</RSU_VAR_VAL>}</#LATEX>
+<#LATEX>\\section{\\DocStrTitlePackageListInCategory}</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>% Table of packages in category</#LATEX>
+<#LATEX>%%%%%%%%%%%%%%%%%%%%%%%%%%%%</#LATEX>
+<#LATEX>\\begin{center}</#LATEX>
+<#LATEX>\\begin{xltabular}{\\textwidth}{|p{2truecm}|X|p{2truecm}|}</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\thead{\\DocStrHeaderPackageName}&\\thead{\\DocStrHeaderPackagePurpose}&\\thead{\\DocStrRefto}\\\\</#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX><#INPUT>category_package_table_rows_in_<RSU_VAR_VAL>category_id</RSU_VAR_VAL></#LATEX>
+<#LATEX>\\hline</#LATEX>
+<#LATEX>\\end{xltabular}</#LATEX>
+<#LATEX>\\end{center}</#LATEX>
+<#LATEX><#INPUT>package_sections_<RSU_VAR_VAL>category_id</RSU_VAR_VAL></#LATEX>

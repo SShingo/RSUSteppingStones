@@ -1,0 +1,1 @@
+﻿<#LATEX>\item <RSU_VAR_VAL>tex_class_creator</RSU_VAR_VAL></#LATEX>

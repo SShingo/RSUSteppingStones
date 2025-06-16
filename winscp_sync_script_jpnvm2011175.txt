@@ -1,0 +1,8 @@
+option batch abort
+option confirm off
+open sftp://sas:smbccf2023@jpnvm2011175 -hostkey="ssh-ed25519 255 07:21:78:1a:d8:fe:55:cb:da:48:2f:1a:db:58:dd:f0"
+option include "*.txt; *.sas;"
+option exclude ".8*; *.bat; .gitignore; winscp_sync*; .git/; bin/; doc/; developing/; _prev_versions/"
+synchronize remote "C:\Users\jpnssu\SAS\MY SAS WORK - RSU_Dev_Module_Git" /opt/sas/RSU/RSU_DevModule
+keepuptodate -delete "C:\Users\jpnssu\SAS\MY SAS WORK - RSU_Dev_Module_Git" /opt/sas/RSU/RSU_DevModule
+exit

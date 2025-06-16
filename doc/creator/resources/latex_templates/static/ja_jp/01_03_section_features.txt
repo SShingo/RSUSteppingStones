@@ -1,0 +1,73 @@
+\RDM は以下の特徴を有します。
+\begin{itemize}
+	\item SAS マクロプログラム集
+	\item 戻り値ありのマクロ関数
+	\item 独自の記法
+	\item （疑似）オブジェクト指向
+	\item 容易なインストールと起動
+\end{itemize}
+
+\subsection{SAS マクロプログラム集}
+SASでプログラムを作成する場合、以下に見るような様々な体系の言語を行き来することが往々にあります。
+\begin{itemize}
+\item SASマクロプログラム（\texttt{\%}で始まるコード）
+\item data step
+\item プロシージャ（\texttt{proc ***}）
+\item プロシージャを通じての多言語（SQL、LUA、RiskDimensionなど） 
+\item fcmp
+\end{itemize}
+\RDM では、プログラムを出来る限りSASマクロで記述できるように、様々な場面で用いる処理をマクロで提供します。
+
+\subsection{戻り値ありのマクロ関数}
+\coderef{is_macro_blank_new}や\coderef{get_count_new}に見るように、\RDM が提供する多くのマクロ関数には「戻り値」があり、通常のプログラミング言語の「関数」の如く機能します。
+
+\begin{marker}
+通常のプログラミング言語と異なり、戻り値を無視することはできません（必ずマクロ変数で受けとる、\texttt{\%put} などで戻り値を処理しなければいけません）。
+\end{marker}
+
+\subsection{独自の記法}
+\RDM で提供されている関数を呼び出す場合、一見見慣れない記述法``\texttt{\%\&...}を使用します。
+\begin{lstlisting}
+/* データセット WORK.test を /tmp/test に保存する */
+%&RSUDS.SaveAs(i_dataset = WORK.test
+            	, i_dir_path = /temp/test)
+\end{lstlisting}
+種明かしをすると、まずModule内で\texttt{RSDS}というグローバルマクロが以下のように定義されており、
+\begin{center}
+\texttt{\%global /readonly RSUDS = RSUDS\_\_;}
+\end{center}
+同時に\RDM には、``\texttt{RSUDS\_\_SaveAs}''というマクロ関数が定義されています。
+\begin{lstlisting}
+/* データセット WORK.test を /tmp/test に保存する */
+%macro RSUDS__SaveAs(i_dataset = WORK.test
+            			, i_dir_path = /temp/test);
+	...
+%mend RSUDS__SaveAs;
+\end{lstlisting}
+以上により、``\texttt{\%\&RSUDS.SaveAs} = \texttt{\%RSUDS\_\_SaveAs}''となり、実は単にマクロ関数を呼び出しているだけであることが分かります。
+
+この記法により以下の効果が得られます。
+\begin{itemize}
+	\item 可読性：上記の例では、``\texttt{RSUDS}''というパッケージの``\texttt{SaveAs}''関数であるということが容易に読み取れます（C\#やJavaのスタティック関数のようなもの）。
+	\item 容易な検索：``\texttt{\%\&RSU}''でコード内を検索することにより、\RDM が提供している機能を用いたコードを抽出可能です。
+\end{itemize}
+
+\subsection{（疑似）オブジェクト指向}
+あたかもオブジェクト指向プログラムでいうクラスの定義、インスタンスの生成ごとき処理によってオブジェクト指向プログラムに近い記述を実現しました。
+\begin{lstlisting}
+%macro process;
+   %local /readonly _MY_TIMER = %&RSUTimer.Create;  /* Timerのインスタンスを作成して_MY_TIMERに保持 */
+   ...
+   %&_MY_TIMER.Lap                      /* ラップ表示1 */
+   ...
+   %&_MY_TIMER.Lap                      /* ラップ表示2 */
+   ...
+   %&_MY_TIMER.Stop                     /* タイマーストップ */
+   %&RSUClass.Dispose(_MY_TIMER)        /* インスタンスの破棄 */
+%mend;
+\end{lstlisting}
+サンプルコードでは``\texttt{\_my\_timer}''というインスタンス（もどき）を生成し、以下の操作（\texttt{Lap}、\texttt{Stop}）を\texttt{\_my\_timer}に対して行っています。
+LapやStopでは、前回の記録時刻が必要となりますが、その値をあたかもインスタンス``\texttt{\_my\_timer}''が保持しているかのような挙動になります。
+
+\subsection{容易なインストールと起動}
+\RDM を使用するには2つのファイルをサーバーの任意の場所（プログラムからパスが通じる場所に）配置し、\RDM 使用プログラムの先頭に``\texttt{\%rsu\_steppingstones\_activate}''と記述するだけです（\chapref{RDM_USAGE}）。
